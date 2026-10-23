@@ -1,0 +1,20 @@
+1. Start with this dataset: 
+    https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
+
+2. Later on, see if there are other variables not included in the dataset that impact dropouts
+
+Meeting notes (10/23/2026):
+    Week 1: 
+        For next meeting:
+            - Clean dataset (Suzana)
+            - Find correlations
+            - EDA Statistics Summary
+            - Find colinearity, multi-linearity
+            - Find most important variables
+    Week 2:
+        Training Model
+    Week 3:
+    Week 4 (Last week to presentation):
+        - Prepare graphs and presentations
+
+
