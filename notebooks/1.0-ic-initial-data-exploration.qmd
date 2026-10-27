@@ -1,0 +1,477 @@
+---
+title: "What predicts student dropout?"
+author: 
+format:
+  html:
+    toc: true
+    code-fold: show
+    embed-resources: true
+jupyter: python3
+execute:
+  warning: false
+---
+
+## Goal
+
+The UCI *Predict Students' Dropout and Academic Success* dataset has 4,424 students and
+36 features, with a three-class target (Dropout / Enrolled / Graduate). The end goal is
+a classifier, so this EDA asks one question over and over: **which features separate
+dropouts from everyone else, and when is that information available?**
+
+That second part matters. The point of the project is *early* intervention, but the
+features fall into two groups:
+
+* **Known at enrollment:** demographics, application path, parents' background,
+  admission grade, finances, macro-economic conditions.
+* **Known only after a semester or two:** the `Curricular units …` columns.
+
+A model that leans on 2nd-semester grades is accurate but late. I keep that split in
+view throughout.
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Fixed color per outcome, used in every chart
+PALETTE = {"Graduate": "#2a78d6", "Dropout": "#eb6834", "Enrolled": "#1baf7a"}
+ORDER = ["Dropout", "Enrolled", "Graduate"]
+INK, MUTED = "#0b0b0b", "#52514e"
+
+plt.rcParams.update({
+    "figure.dpi": 110, "axes.spines.top": False, "axes.spines.right": False,
+    "axes.edgecolor": MUTED, "axes.labelcolor": INK, "xtick.color": MUTED,
+    "ytick.color": MUTED, "axes.grid": True, "grid.color": "#e6e5e1",
+    "grid.linewidth": 0.6, "axes.axisbelow": True, "font.size": 10,
+})
+```
+
+## Load and clean
+
+The file is **semicolon-delimited**, and one column name has a stray tab in it
+(`"Daytime/evening attendance\t"`), so I strip whitespace from every name.
+
+```{python}
+
+from competitions.config import RAW_DATA_DIR
+
+df = pd.read_csv(RAW_DATA_DIR / "data.csv", sep=";")
+df.columns = df.columns.str.strip()
+df.shape
+```
+
+```{python}
+print("Missing values:", df.isna().sum().sum())
+print("Duplicate rows:", df.duplicated().sum())
+df.dtypes.value_counts()
+```
+
+No missing values and no duplicates, as the documentation promises. Every categorical
+feature is stored as an integer code, though, so I add readable labels for the ones I
+plot, plus a binary `dropout` flag that makes "dropout rate" a simple mean.
+
+```{python}
+course_names = {
+    33: "Biofuel Production Tech", 171: "Animation & Multimedia", 8014: "Social Service (evening)",
+    9003: "Agronomy", 9070: "Communication Design", 9085: "Veterinary Nursing",
+    9119: "Informatics Engineering", 9130: "Equinculture", 9147: "Management",
+    9238: "Social Service", 9254: "Tourism", 9500: "Nursing", 9556: "Oral Hygiene",
+    9670: "Advertising & Marketing", 9773: "Journalism & Communication",
+    9853: "Basic Education", 9991: "Management (evening)",
+}
+app_mode_names = {
+    1: "1st phase, general", 17: "2nd phase, general", 18: "3rd phase, general",
+    39: "Over 23 years old", 43: "Change of course", 44: "Tech. specialization diploma",
+    7: "Holders of other higher courses", 42: "Transfer", 51: "Change of inst./course",
+    53: "Short cycle diploma", 15: "International student",
+}
+
+df["course_name"] = df["Course"].map(course_names)
+df["app_mode_name"] = df["Application mode"].map(app_mode_names).fillna("Other")
+df["Target"] = pd.Categorical(df["Target"], categories=ORDER)
+df["dropout"] = (df["Target"] == "Dropout").astype(int)
+```
+
+## The target
+
+```{python}
+counts = df["Target"].value_counts().reindex(ORDER)
+fig, ax = plt.subplots(figsize=(6, 2.4))
+ax.barh(counts.index, counts.values, color=[PALETTE[k] for k in counts.index], height=0.6)
+for i, v in enumerate(counts.values):
+    ax.text(v + 30, i, f"{v:,}  ({v / len(df):.0%})", va="center", color=INK)
+ax.set_xlim(0, counts.max() * 1.25)
+ax.set_title("Outcome at the end of the normal course duration", loc="left")
+ax.grid(axis="y", visible=False)
+ax.invert_yaxis()
+plt.show()
+```
+
+Half graduate, about a third drop out, and 18% are still enrolled. The base dropout
+rate is **32%**, which is the number to compare every group against below.
+
+`Enrolled` is the awkward class: those students haven't finished yet, so some will
+eventually drop out and some will graduate. It's the smallest class and, as the plots
+below show, it usually sits between the other two. Treating the task as
+**Dropout vs. not** is a reasonable simplification if the goal is flagging at-risk
+students.
+
+## A data-quality wrinkle: students with zero units
+
+```{python}
+cu = [c for c in df.columns if c.startswith("Curricular units")]
+no_units = df[cu].sum(axis=1).eq(0)
+print(f"{no_units.sum()} students have 0 in every curricular-unit column")
+df.loc[no_units, "Target"].value_counts()
+```
+
+These 180 students enrolled in, were credited for, and were evaluated in *nothing* in
+either semester, yet 75 of them are labelled Graduate. That's hard to explain (maybe
+records from a different system, or part-time arrangements), and it means
+`grade == 0` doesn't always mean "failed". It's worth a flag column, or at least
+excluding them when looking at grades.
+
+```{python}
+df["no_units"] = no_units.astype(int)
+active = df[~no_units]   # used for the grade plots
+```
+
+## Features known at enrollment
+
+### Money is the strongest early signal
+
+```{python}
+def rate_table(col, labels=None):
+    t = df.groupby(col, observed=True)["dropout"].agg(rate="mean", n="size")
+    if labels:
+        t.index = t.index.map(labels)
+    return t
+
+binary = {
+    "Tuition fees up to date": {0: "Not up to date", 1: "Up to date"},
+    "Debtor": {0: "Not a debtor", 1: "Debtor"},
+    "Scholarship holder": {0: "No scholarship", 1: "Scholarship"},
+    "Gender": {0: "Female", 1: "Male"},
+    "Daytime/evening attendance": {0: "Evening", 1: "Daytime"},
+    "Displaced": {0: "Not displaced", 1: "Displaced"},
+}
+
+fig, axes = plt.subplots(2, 3, figsize=(10, 5), sharex=True)
+base = df["dropout"].mean()
+for ax, (col, labels) in zip(axes.flat, binary.items()):
+    t = rate_table(col, labels)
+    ax.barh(t.index, t["rate"], color=PALETTE["Dropout"], height=0.55)
+    ax.axvline(base, color=MUTED, ls="--", lw=1)
+    for i, (r, n) in enumerate(zip(t["rate"], t["n"])):
+        ax.text(r + 0.02, i, f"{r:.0%}  (n={n:,})", va="center", fontsize=9, color=INK)
+    ax.set_title(col, loc="left", fontsize=10)
+    ax.set_xlim(0, 1.15)
+    ax.grid(axis="y", visible=False)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.0%}"))
+fig.suptitle("Dropout rate by group (dashed line = overall 32%)", x=0.01, ha="left")
+fig.tight_layout()
+plt.show()
+```
+
+* **Tuition not up to date → 87% dropout** (vs 25%). This is the single most
+  separating binary feature in the data. Caveat: falling behind on fees may be a
+  *symptom* of having already disengaged, not just a cause.
+* **Debtors** drop out at 62%, roughly double the rate of non-debtors.
+* **Scholarship holders** drop out at only 12%.
+* **Men** drop out at 45% vs 25% for women. Gender is tangled up with course choice
+  (see below), so part of this is which programs men enroll in.
+* Evening students and non-displaced students are moderately higher.
+
+```{python}
+pd.crosstab(df["Debtor"], df["Tuition fees up to date"], normalize="index").round(2)
+```
+
+`Debtor` and `Tuition fees up to date` overlap but aren't the same variable, so both
+are worth keeping.
+
+### Age: older students drop out far more
+
+```{python}
+fig, ax = plt.subplots(figsize=(8, 3.5))
+for t in ORDER:
+    sns.kdeplot(df.loc[df["Target"] == t, "Age at enrollment"], ax=ax,
+                color=PALETTE[t], lw=2, label=t, cut=0, common_norm=False)
+ax.set_xlabel("Age at enrollment")
+ax.set_ylabel("Density")
+ax.set_title("Age distribution by outcome", loc="left")
+ax.legend(frameon=False)
+plt.show()
+
+age_bins = pd.cut(df["Age at enrollment"], [16, 19, 22, 25, 30, 40, 70],
+                  labels=["17-19", "20-22", "23-25", "26-30", "31-40", "41+"])
+df.groupby(age_bins, observed=True)["dropout"].agg(rate="mean", n="size").round(3)
+```
+
+Graduates are concentrated at 18-20. Dropout climbs from 21% for 17-19 year-olds to
+**~55-60% for students over 25**. Age is right-skewed with a long tail, so binning
+it or log-transforming it may help a linear model.
+
+Age also explains the **application mode** pattern: the "Over 23 years old" route is
+by definition older students.
+
+```{python}
+t = (df.groupby("app_mode_name")["dropout"].agg(rate="mean", n="size")
+       .query("n >= 50").sort_values("rate"))
+fig, ax = plt.subplots(figsize=(8, 3.8))
+ax.barh(t.index, t["rate"], color=PALETTE["Dropout"], height=0.6)
+ax.axvline(base, color=MUTED, ls="--", lw=1)
+for i, (r, n) in enumerate(zip(t["rate"], t["n"])):
+    ax.text(r + 0.01, i, f"{r:.0%}  (n={n:,})", va="center", fontsize=9, color=INK)
+ax.set_xlim(0, 0.8)
+ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.0%}"))
+ax.set_title("Dropout rate by application mode (groups with n ≥ 50)", loc="left")
+ax.grid(axis="y", visible=False)
+plt.show()
+```
+
+### Course matters a lot
+
+```{python}
+t = df.groupby("course_name")["dropout"].agg(rate="mean", n="size").sort_values("rate")
+fig, ax = plt.subplots(figsize=(8, 5.5))
+ax.barh(t.index, t["rate"], color=PALETTE["Dropout"], height=0.65)
+ax.axvline(base, color=MUTED, ls="--", lw=1)
+for i, (r, n) in enumerate(zip(t["rate"], t["n"])):
+    ax.text(r + 0.01, i, f"{r:.0%}  (n={n})", va="center", fontsize=9, color=INK)
+ax.set_xlim(0, 0.85)
+ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.0%}"))
+ax.set_title("Dropout rate by course", loc="left")
+ax.grid(axis="y", visible=False)
+plt.show()
+```
+
+Nursing (15%) and Social Service (18%) are at the bottom; Informatics Engineering,
+Equinculture, and evening Management are above 50%. (Biofuel Production is 67%, but
+with only 12 students.) `Course` is stored as a number, so it must be **one-hot
+encoded**. Its raw correlation with dropout is near zero only because the codes are
+meaningless as numbers.
+
+```{python}
+# How much of the gender gap is course mix?
+pd.crosstab(df["course_name"], df["Gender"].map({0: "Female", 1: "Male"}),
+            normalize="index").round(2).sort_values("Male", ascending=False).head(6)
+```
+
+Informatics Engineering (54% dropout) is 96% male, and Biofuel and Agronomy are mostly
+male too, while low-dropout Nursing and Social Service are 80%+ female. So the gender gap
+partly reflects course choice; a model with both variables can sort out how much.
+
+### Prior achievement: weaker than you'd expect
+
+```{python}
+fig, axes = plt.subplots(1, 2, figsize=(10, 3.5), sharey=True)
+for ax, col in zip(axes, ["Admission grade", "Previous qualification (grade)"]):
+    sns.boxplot(data=df, x="Target", y=col, hue="Target", order=ORDER, palette=PALETTE,
+                ax=ax, width=0.5, fliersize=2, legend=False)
+    ax.set_title(col, loc="left")
+    ax.set_xlabel("")
+    ax.set_ylabel("Grade (0–200)")
+plt.tight_layout()
+plt.show()
+
+df.groupby("Target", observed=True)[["Admission grade", "Previous qualification (grade)"]].median()
+```
+
+Graduates have slightly higher admission grades (median 127 vs 124), but the
+distributions overlap almost completely. Entry grades alone won't flag many dropouts.
+
+### Parents' background and the economy: little signal
+
+```{python}
+weak = ["Unemployment rate", "Inflation rate", "GDP", "Mother's qualification",
+        "Father's qualification", "Mother's occupation", "Father's occupation",
+        "Nacionality", "International", "Educational special needs"]
+df[weak].corrwith(df["dropout"]).round(3).sort_values()
+```
+
+None of these has a correlation above |0.07| with dropout. (For the coded
+qualification/occupation columns, correlation isn't really meaningful, but group
+rates tell the same story.) The macro variables take only ~10 distinct values each,
+one per enrollment year, so they mostly act as a proxy for cohort.
+
+```{python}
+df.groupby("Unemployment rate")["dropout"].agg(rate="mean", n="size").round(3).T
+```
+
+The parents' columns have **dozens of rare codes** (e.g., 29 levels for mother's
+qualification, many with < 10 students). Before modeling I'd collapse them into a few
+groups (e.g., basic / secondary / higher education / unknown).
+
+```{python}
+df[["Mother's qualification", "Father's qualification",
+    "Mother's occupation", "Father's occupation"]].nunique()
+```
+
+## Features known after the first year
+
+### First-semester performance separates the classes sharply
+
+```{python}
+act = active.copy()
+for s in ["1st", "2nd"]:
+    enr = act[f"Curricular units {s} sem (enrolled)"]
+    act[f"pass_rate_{s}"] = act[f"Curricular units {s} sem (approved)"] / enr.replace(0, np.nan)
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 3.6))
+sns.kdeplot(data=act, x="pass_rate_1st", hue="Target", hue_order=ORDER, palette=PALETTE,
+            common_norm=False, cut=0, lw=2, ax=axes[0])
+axes[0].set_title("Share of 1st-sem units passed", loc="left")
+axes[0].set_xlabel("Units approved ÷ units enrolled")
+sns.kdeplot(data=act, x="Curricular units 1st sem (grade)", hue="Target", hue_order=ORDER,
+            palette=PALETTE, common_norm=False, cut=0, lw=2, ax=axes[1])
+axes[1].set_title("1st-sem grade average (0–20)", loc="left")
+for ax in axes:
+    ax.get_legend().set_frame_on(False)
+plt.tight_layout()
+plt.show()
+```
+
+The grade plot is **bimodal for dropouts**: a big spike at 0 (students who passed
+nothing) and a second hump around 11-12 that overlaps with graduates. Pass rate is
+cleaner: most graduates passed nearly everything they enrolled in.
+
+```{python}
+zero_pass = df["Curricular units 1st sem (approved)"].eq(0) & ~no_units
+print(f"Students who passed 0 units in the 1st semester: {zero_pass.sum()}")
+df.loc[zero_pass, "Target"].value_counts(normalize=True).round(3)
+```
+
+**Of the 538 students who passed zero first-semester units, 92% dropped out** (and only 2 graduated). This is
+the clearest early-warning flag in the data, and it's available after just one term.
+
+Because the grade average is 0 whenever a student passed nothing, grade and pass
+count are partly the same information. Engineered features like **pass rate**
+(`approved / enrolled`) and a **zero-approved flag** are probably more useful than the
+raw counts.
+
+### Trajectory from semester 1 to semester 2
+
+```{python}
+act["grade_change"] = (act["Curricular units 2nd sem (grade)"]
+                       - act["Curricular units 1st sem (grade)"])
+act.groupby("Target", observed=True)[["Curricular units 1st sem (grade)",
+                                      "Curricular units 2nd sem (grade)",
+                                      "grade_change", "pass_rate_1st",
+                                      "pass_rate_2nd"]].median().round(2)
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+for t in ["Graduate", "Enrolled", "Dropout"]:
+    d = act[act["Target"] == t]
+    ax.scatter(d["Curricular units 1st sem (grade)"], d["Curricular units 2nd sem (grade)"],
+               s=12, alpha=0.35, color=PALETTE[t], label=t, edgecolors="none")
+ax.plot([0, 20], [0, 20], color=MUTED, lw=1, ls="--")
+ax.set_xlabel("1st-sem grade average")
+ax.set_ylabel("2nd-sem grade average")
+ax.set_title("Grades in semester 1 vs semester 2", loc="left")
+ax.legend(frameon=False, markerscale=2)
+plt.show()
+```
+
+Many dropouts sit on the **x-axis**: a passing grade in semester 1 and *zero* in
+semester 2, i.e. they stopped showing up. That drop is visible only after the second
+semester, which is why the 2nd-semester columns are the most predictive features in
+the dataset (correlation ≈ −0.57). They're also the least useful for *early*
+intervention.
+
+## How strong is each feature, overall?
+
+A single ranking puts the pieces together. I use **mutual information** with the
+three-class target because it picks up non-linear and categorical relationships that
+correlation misses (like `Course`).
+
+```{python}
+from sklearn.feature_selection import mutual_info_classif
+
+features = [c for c in df.columns
+            if c not in ["Target", "dropout", "course_name", "app_mode_name", "no_units"]]
+discrete = [df[c].nunique() < 30 or c in ["Course", "Application mode", "Nacionality",
+            "Mother's occupation", "Father's occupation", "Mother's qualification",
+            "Father's qualification", "Previous qualification"] for c in features]
+mi = pd.Series(mutual_info_classif(df[features], df["Target"].cat.codes,
+                                   discrete_features=discrete, random_state=0),
+               index=features).sort_values()
+
+timing = ["After enrollment" if c.startswith("Curricular") else "At enrollment" for c in mi.index]
+colors = ["#86b6ef" if t == "After enrollment" else "#1c5cab" for t in timing]
+
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.barh(mi.index, mi.values, color=colors, height=0.7)
+ax.set_title("Mutual information with outcome", loc="left")
+ax.set_xlabel("Mutual information (higher = more informative)")
+ax.grid(axis="y", visible=False)
+from matplotlib.patches import Patch
+ax.legend(handles=[Patch(color="#1c5cab", label="Known at enrollment"),
+                   Patch(color="#86b6ef", label="Known after 1st/2nd semester")],
+          frameon=False, loc="lower right")
+plt.tight_layout()
+plt.show()
+```
+
+The semester-performance columns dominate. Among enrollment-time features, the
+leaders are **tuition status, course, age, application mode, and scholarship**.
+
+One caution: mutual information is biased upward for features with many levels, so
+the parents' occupation columns (40+ codes each) look more informative here than their
+group dropout rates suggest. Debtor status, with only two levels, is probably more
+useful than its rank implies.
+
+### How early can we predict?
+
+A quick check of how much signal is available at each stage. This isn't a tuned
+model, just a gradient-boosted classifier with 5-fold cross-validated
+macro-F1 on the three classes.
+
+```{python}
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+
+enroll_feats = [c for c in features if not c.startswith("Curricular")]
+sem1_feats = enroll_feats + [c for c in features if "1st sem" in c]
+all_feats = features
+
+cv = StratifiedKFold(5, shuffle=True, random_state=0)
+y = df["Target"].cat.codes
+results = {}
+for name, cols in [("Enrollment only", enroll_feats),
+                   ("+ 1st semester", sem1_feats),
+                   ("+ 2nd semester", all_feats)]:
+    cat_mask = [c in ["Course", "Application mode", "Marital status", "Nacionality",
+                      "Previous qualification"] for c in cols]
+    model = HistGradientBoostingClassifier(categorical_features=cat_mask, random_state=0)
+    s = cross_val_score(model, df[cols], y, cv=cv, scoring="f1_macro")
+    results[name] = {"macro F1": s.mean().round(3), "± sd": s.std().round(3)}
+pd.DataFrame(results).T
+```
+
+Enrollment data alone gets a macro-F1 of about **0.56**; adding the first semester
+jumps it to about **0.66**, and the second semester adds a bit more (about **0.72**). That's the core trade-off: **the earliest
+model is the most useful for intervention and the least accurate.** The `Enrolled`
+class drags macro-F1 down at every stage because it overlaps with both others.
+
+## Takeaways for modeling
+
+1. **Class imbalance:** 50 / 32 / 18. Use stratified splits and macro-F1 or
+   per-class recall, not accuracy. Consider class weights, or reframe as
+   Dropout vs. not.
+2. **Strongest early signals:** tuition fees not up to date (87% dropout), debtor
+   status, no scholarship, age over 25, the "Over 23" application route, male, evening
+   attendance, and course.
+3. **Strongest overall signal:** semester performance, especially passing zero units
+   (92% dropout) and a collapse to zero in the 2nd semester.
+4. **Weak signals:** admission grade, parents' education/occupation, nationality,
+   and the macro-economic variables.
+5. **Preprocessing to-dos:**
+   * One-hot encode `Course` and `Application mode` (they're codes, not numbers).
+   * Collapse rare levels in parents' qualification/occupation and nationality.
+   * Engineer pass rate per semester, a zero-approved flag, and the 1st→2nd grade change.
+   * Flag or drop the 180 students with zero units in every semester.
+6. **Decide the use case first:** a model for *early* intervention should be built
+   on enrollment features (maybe plus semester 1), not semester 2.
