@@ -11,6 +11,7 @@ pytest
 python-dotenv
 ruff
 scikit-learn
+seaborn
 tqdm
 typer
 -e .
