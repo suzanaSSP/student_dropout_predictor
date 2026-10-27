@@ -1,5 +1,10 @@
 # Data
-/data/
+#/data/
+
+# Quarto
+.quarto/
+notebooks/*.html
+notebooks/*_files/
 
 # Mac OS-specific storage files
 .DS_Store
