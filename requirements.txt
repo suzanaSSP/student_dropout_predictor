@@ -1,8 +1,4 @@
-ipython
-jupyterlab
-loguru
 matplotlib
-mkdocs
 notebook
 numpy
 pandas

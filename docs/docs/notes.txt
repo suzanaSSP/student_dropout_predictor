@@ -17,4 +17,11 @@ Meeting notes (10/23/2026):
     Week 4 (Last week to presentation):
         - Prepare graphs and presentations
 
+Meeting notes (10/27/2026):
+    - Limitation on data: we don't know what type of scholarships students have
+    - Tasks
+        - Find dataset from US
+        - Model Regression Analysis
+        - 
+
 
