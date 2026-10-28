@@ -1,0 +1,1500 @@
+B00479.00    [PSTRAN_TERM_GPA.001]                          Survey Year: PSTR
+  PRIMARY VARIABLE
+
+             PSTRAN_TERM_GPA 001
+ 
+Term-specific summary: Recorded GPA, non-normalized.  The variable has 2 implied
+decimal places. For disclosure reasons, values higher than 4.0 are coded invalid
+skips (-3).  Note: an invalid skip (-3) indicates that the information wasnot 
+available in transcript.
+ 
+    3478           0 TO 1000
+       0        1001 TO 2000
+       0        2001 TO 3000
+       0        3001 TO 4000
+       0        4001 TO 5000
+       0        5001 TO 6000
+       0        6001 TO 7000
+       0        7001 TO 8000
+       0        8001 TO 9000
+       0        9001 TO 10000
+  -------
+    3478
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)     315
+TOTAL =========>    3793   VALID SKIP(-4)     916     NON-INTERVIEW(-5)    4275
+ 
+Min:              0        Max:            400        Mean:              242.41
+ 
+Lead In: B00478.00[Default]
+Default Next Question: B00480.00
+--------------------------------------------------------------------------------
+R00001.00    [PUBID]                                        Survey Year: 1997
+  PRIMARY VARIABLE
+
+             PUBID, YOUTH CASE IDENTIFICATION CODE
+ 
+COMMENT: YOUTH CASE IDENTIFICATION CODE
+ 
+       0           0
+     998           1 TO 999
+     999        1000 TO 1999
+     997        2000 TO 2999
+     996        3000 TO 3999
+     998        4000 TO 4999
+     996        5000 TO 5999
+     994        6000 TO 6999
+     994        7000 TO 7999
+     989        8000 TO 8999
+      23        9000 TO 9999
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:           9022        Mean:              4504.3
+ 
+Lead In: R72976.00[Default]
+Default Next Question: R05363.00
+--------------------------------------------------------------------------------
+R05363.00    [KEY!SEX]                                      Survey Year: 1997
+  PRIMARY VARIABLE
+
+             KEY!SEX, RS SEX (SYMBOL)
+ 
+COMMENT: Sex of Youth
+ 
+    4599       1 Male
+    4385       2 Female
+       0       0 No Information
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:              2        Mean:                1.49
+ 
+Lead In: R00001.00[Default]
+Default Next Question: R05364.00
+--------------------------------------------------------------------------------
+R05364.01    [KEY!BDATE_M]                                  Survey Year: 1997
+  PRIMARY VARIABLE
+
+             KEY!BDATE, RS BIRTHDATE MONTH/YEAR (SYMBOL)
+ 
+COMMENT: Birthdate of Youth
+ 
+     816           1: January
+     693           2: February
+     760           3: March
+     659           4: April
+     689           5: May
+     720           6: June
+     762           7: July
+     782           8: August
+     839           9: September
+     765          10: October
+     763          11: November
+     736          12: December
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             12        Mean:                6.56
+ 
+Earliest (NonMissing): JANUARY/1980
+Latest   (NonMissing): DECEMBER/1984
+ 
+Lead In: None.
+Default Next Question: R05364.02
+--------------------------------------------------------------------------------
+R05364.02    [KEY!BDATE_Y]                                  Survey Year: 1997
+  PRIMARY VARIABLE
+
+             KEY!BDATE, RS BIRTHDATE MONTH/YEAR (SYMBOL)
+ 
+COMMENT: Birthdate of Youth
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:           1980        Max:           1984        Mean:             1982.01
+ 
+Earliest (NonMissing): JANUARY/1980
+Latest   (NonMissing): DECEMBER/1984
+ 
+Lead In: R05364.01[Default]
+Default Next Question: R05366.00
+--------------------------------------------------------------------------------
+R12014.00    [CV_ENROLLSTAT]                                Survey Year: 1997
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     226       1 Not enrolled, no high school degree, no GED
+       3       2 Not enrolled, GED
+       4       3 Not enrolled, high school degree
+       0       4 Not enrolled, some college
+       0       5 Not enrolled, 2-year college graduate
+       0       6 Not enrolled, 4-year college graduate
+       0       7 Not enrolled, graduate degree
+    8742       8 Enrolled in grades 1-12, not a high school graduate
+       5       9 Enrolled in a 2-year college
+       2      10 Enrolled in a 4-year college
+       0      11 Enrolled in a graduate program
+  -------
+    8982
+ 
+Refusal(-1)            0
+Don't Know(-2)         2
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             10        Mean:                7.82
+ 
+Lead In: R12013.00[Default]
+Default Next Question: R12015.00
+--------------------------------------------------------------------------------
+R12358.00    [CV_SAMPLE_TYPE]                               Survey Year: 1997
+  PRIMARY VARIABLE
+
+             SAMPLE TYPE.  CROSS-SECTIONAL OR OVERSAMPLE
+ 
+Sample type: Is the respondent a member of the cross-sectional sample or the 
+oversample?
+ 
+    6748       1 Cross-sectional
+    2236       0 Oversample
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .75
+ 
+Lead In: R12338.00[Default]
+Default Next Question: R12359.00
+--------------------------------------------------------------------------------
+R14826.00    [KEY!RACE_ETHNICITY]                           Survey Year: 1997
+  PRIMARY VARIABLE
+
+             KEY!RACE_ETHNICITY, COMBINED RACE AND ETHNICITY (SYMBOL)
+ 
+COMMENT: Combined race - ethnicity variable
+ 
+    2335       1 Black
+    1901       2 Hispanic
+      83       3 Mixed Race (Non-Hispanic)
+    4665       4 Non-Black / Non-Hispanic
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:              4        Mean:                2.79
+ 
+Lead In: R05387.00[Default]
+Default Next Question: R05389.00
+--------------------------------------------------------------------------------
+R25600.01    [CV_ENROLLSTAT_EDT]                            Survey Year: 1998
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS EDT
+ 
+Enrollment status as of the survey date (edited).
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     607       1 Not enrolled, no high school degree, no GED
+      50       2 Not enrolled, GED
+     313       3 Not enrolled, high school degree
+      19       4 Not enrolled, some college
+       0       5 Not enrolled, 2-year college graduate
+       0       6 Not enrolled, 4-year college graduate
+       0       7 Not enrolled, graduate degree
+    7022       8 Enrolled in grades 1-12, not a high school graduate
+     137       9 Enrolled in a 2-year college
+     236      10 Enrolled in a 4-year college
+       0      11 Enrolled in a graduate program
+  -------
+    8384
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       2
+TOTAL =========>    8386   VALID SKIP(-4)       0     NON-INTERVIEW(-5)     598
+ 
+Min:              1        Max:             10        Mean:                7.33
+ 
+Lead In: R25600.00[Default]
+Default Next Question: R25628.00
+--------------------------------------------------------------------------------
+R38815.01    [CV_ENROLLSTAT_EDT]                            Survey Year: 1999
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS EDT
+ 
+Enrollment status as of the survey date (edited).
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     794       1 Not enrolled, no high school degree, no GED
+     143       2 Not enrolled, GED
+     735       3 Not enrolled, high school degree
+     116       4 Not enrolled, some college
+       1       5 Not enrolled, 2-year college graduate
+       0       6 Not enrolled, 4-year college graduate
+       0       7 Not enrolled, graduate degree
+    5387       8 Enrolled in grades 1-12, not a high school graduate
+     329       9 Enrolled in a 2-year college
+     698      10 Enrolled in a 4-year college
+       0      11 Enrolled in a graduate program
+  -------
+    8203
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       5
+TOTAL =========>    8208   VALID SKIP(-4)       0     NON-INTERVIEW(-5)     776
+ 
+Min:              1        Max:             10        Mean:                6.92
+ 
+Lead In: R38815.00[Default]
+Default Next Question: R38844.00
+--------------------------------------------------------------------------------
+R54606.01    [CV_ENROLLSTAT_EDT]                            Survey Year: 2000
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS EDT
+ 
+Enrollment status as of the survey date (edited).
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+    1022       1 Not enrolled, no high school degree, no GED
+     247       2 Not enrolled, GED
+    1150       3 Not enrolled, high school degree
+     333       4 Not enrolled, some college
+       8       5 Not enrolled, 2-year college graduate
+       0       6 Not enrolled, 4-year college graduate
+       0       7 Not enrolled, graduate degree
+    3707       8 Enrolled in grades 1-12, not a high school graduate
+     517       9 Enrolled in a 2-year college
+    1089      10 Enrolled in a 4-year college
+       0      11 Enrolled in a graduate program
+  -------
+    8073
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       7
+TOTAL =========>    8080   VALID SKIP(-4)       0     NON-INTERVIEW(-5)     904
+ 
+Min:              1        Max:             10        Mean:                6.38
+ 
+Lead In: R54606.00[Default]
+Default Next Question: R54636.00
+--------------------------------------------------------------------------------
+R72242.01    [CV_ENROLLSTAT_EDT]                            Survey Year: 2001
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS EDT
+ 
+Enrollment status as of the survey date (edited).
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+    1089       1 Not enrolled, no high school degree, no GED
+     350       2 Not enrolled, GED
+    1485       3 Not enrolled, high school degree
+     597       4 Not enrolled, some college
+      24       5 Not enrolled, 2-year college graduate
+       9       6 Not enrolled, 4-year college graduate
+       0       7 Not enrolled, graduate degree
+    2152       8 Enrolled in grades 1-12, not a high school graduate
+     667       9 Enrolled in a 2-year college
+    1492      10 Enrolled in a 4-year college
+       4      11 Enrolled in a graduate program
+  -------
+    7869
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      13
+TOTAL =========>    7882   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1102
+ 
+Min:              1        Max:             11        Mean:                5.97
+ 
+Lead In: R72242.00[Default]
+Default Next Question: R72273.00
+--------------------------------------------------------------------------------
+S15380.01    [CV_ENROLLSTAT_EDT]                            Survey Year: 2002
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS EDT
+ 
+Enrollment status as of the survey date (edited).
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+    1134       1 Not enrolled, no high school degree, no GED
+     467       2 Not enrolled, GED
+    1805       3 Not enrolled, high school degree
+     912       4 Not enrolled, some college
+      56       5 Not enrolled, 2-year college graduate
+      74       6 Not enrolled, 4-year college graduate
+       1       7 Not enrolled, graduate degree
+     712       8 Enrolled in grades 1-12, not a high school graduate
+     825       9 Enrolled in a 2-year college
+    1866      10 Enrolled in a 4-year college
+      26      11 Enrolled in a graduate program
+  -------
+    7878
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      18
+TOTAL =========>    7896   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1088
+ 
+Min:              1        Max:             11        Mean:                5.58
+ 
+Lead In: S15380.00[Default]
+Default Next Question: S15412.00
+--------------------------------------------------------------------------------
+S19990.00    [CV_COLLEGE_TYPE.01]                           Survey Year: 2003
+  PRIMARY VARIABLE
+
+             COLLEGE 01 PRIVATE OR PUBLIC
+ 
+This variable indicates whether the college is public, private not-for-profit, 
+or private for-profit; the information is from the IPEDS database (Nation Center
+for Education Statistics).
+ 
+    2602       1 Public institution
+     537       2 Private not-for-profit institution
+     139       3 Private for-profit institution
+  -------
+    3278
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      42
+TOTAL =========>    3320   VALID SKIP(-4)    4434     NON-INTERVIEW(-5)    1230
+ 
+Min:              1        Max:              3        Mean:                1.25
+ 
+Lead In: None.
+Default Next Question: S19991.00
+--------------------------------------------------------------------------------
+S19991.00    [CV_COLLEGE_TYPE.02]                           Survey Year: 2003
+  PRIMARY VARIABLE
+
+             COLLEGE 02 PRIVATE OR PUBLIC
+ 
+This variable indicates whether the college is public, private not-for-profit, 
+or private for-profit; the information is from the IPEDS database (Nation Center
+for Education Statistics).
+ 
+     593       1 Public institution
+     104       2 Private not-for-profit institution
+      39       3 Private for-profit institution
+  -------
+     736
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      28
+TOTAL =========>     764   VALID SKIP(-4)    6990     NON-INTERVIEW(-5)    1230
+ 
+Min:              1        Max:              3        Mean:                1.25
+ 
+Lead In: S19990.00[Default]
+Default Next Question: S19992.00
+--------------------------------------------------------------------------------
+S19992.00    [CV_COLLEGE_TYPE.03]                           Survey Year: 2003
+  PRIMARY VARIABLE
+
+             COLLEGE 03 PRIVATE OR PUBLIC
+ 
+This variable indicates whether the college is public, private not-for-profit, 
+or private for-profit; the information is from the IPEDS database (Nation Center
+for Education Statistics).
+ 
+      34       1 Public institution
+       3       2 Private not-for-profit institution
+       2       3 Private for-profit institution
+  -------
+      39
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      39   VALID SKIP(-4)    7715     NON-INTERVIEW(-5)    1230
+ 
+Min:              1        Max:              3        Mean:                1.18
+ 
+Lead In: S19991.00[Default]
+Default Next Question: S19993.00
+--------------------------------------------------------------------------------
+S19993.00    [CV_COLLEGE_TYPE.04]                           Survey Year: 2003
+  PRIMARY VARIABLE
+
+             COLLEGE 04 PRIVATE OR PUBLIC
+ 
+This variable indicates whether the college is public, private not-for-profit, 
+or private for-profit; the information is from the IPEDS database (Nation Center
+for Education Statistics).
+ 
+       2       1 Public institution
+       0       2 Private not-for-profit institution
+       0       3 Private for-profit institution
+  -------
+       2
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       2   VALID SKIP(-4)    7752     NON-INTERVIEW(-5)    1230
+ 
+Min:              1        Max:              1        Mean:                   1
+ 
+Lead In: S19992.00[Default]
+Default Next Question: S19994.00
+--------------------------------------------------------------------------------
+S19994.00    [CV_COLLEGE_TYPE.05]                           Survey Year: 2003
+  PRIMARY VARIABLE
+
+             COLLEGE 05 PRIVATE OR PUBLIC
+ 
+This variable indicates whether the college is public, private not-for-profit, 
+or private for-profit; the information is from the IPEDS database (Nation Center
+for Education Statistics).
+ 
+       2       1 Public institution
+       0       2 Private not-for-profit institution
+       0       3 Private for-profit institution
+  -------
+       2
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       2   VALID SKIP(-4)    7752     NON-INTERVIEW(-5)    1230
+ 
+Min:              1        Max:              1        Mean:                   1
+ 
+Lead In: S19993.00[Default]
+Default Next Question: S20194.02
+--------------------------------------------------------------------------------
+S20044.00    [CV_ASSOC_CREDITS.01]                          Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD ASSOCIATES DEGREE AT SCHOOL 01
+ 
+Fraction of credits earned toward an associate's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+      66           0
+      20           1 TO 9
+      54          10 TO 19
+      53          20 TO 29
+      66          30 TO 39
+      60          40 TO 49
+      68          50 TO 59
+      64          60 TO 69
+      52          70 TO 79
+      60          80 TO 89
+      50          90 TO 99
+      85         100 TO 99999999: 100+
+  -------
+     698
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)     254
+TOTAL =========>     952   VALID SKIP(-4)    6802     NON-INTERVIEW(-5)    1230
+ 
+Min:              0        Max:            100        Mean:               53.04
+ 
+Lead In: S20010.00[Default]
+Default Next Question: S20045.00
+--------------------------------------------------------------------------------
+S20045.00    [CV_ASSOC_CREDITS.02]                          Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD ASSOCIATES DEGREE AT SCHOOL 02
+ 
+Fraction of credits earned toward an associate's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+      34           0
+       6           1 TO 9
+      21          10 TO 19
+      17          20 TO 29
+      13          30 TO 39
+      13          40 TO 49
+      11          50 TO 59
+      13          60 TO 69
+       4          70 TO 79
+       3          80 TO 89
+       2          90 TO 99
+       1         100 TO 99999999: 100+
+  -------
+     138
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      80
+TOTAL =========>     218   VALID SKIP(-4)    7536     NON-INTERVIEW(-5)    1230
+ 
+Min:              0        Max:            100        Mean:                28.8
+ 
+Lead In: S20044.00[Default]
+Default Next Question: S20046.00
+--------------------------------------------------------------------------------
+S20046.00    [CV_ASSOC_CREDITS.03]                          Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD ASSOCIATES DEGREE AT SCHOOL 03
+ 
+Fraction of credits earned toward an associate's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+       3           0
+       0           1 TO 9
+       1          10 TO 19
+       1          20 TO 29
+       0          30 TO 39
+       0          40 TO 49
+       0          50 TO 59
+       1          60 TO 69
+       0          70 TO 79
+       1          80 TO 89
+       1          90 TO 99
+       1         100 TO 99999999: 100+
+  -------
+       9
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       5
+TOTAL =========>      14   VALID SKIP(-4)    7740     NON-INTERVIEW(-5)    1230
+ 
+Min:              0        Max:            100        Mean:               42.22
+ 
+Lead In: S20045.00[Default]
+Default Next Question: S20047.00
+--------------------------------------------------------------------------------
+S20047.00    [CV_ASSOC_CREDITS.04]                          Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD ASSOCIATES DEGREE AT SCHOOL 04
+ 
+Fraction of credits earned toward an associate's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+       0           0
+       0           1 TO 9
+       1          10 TO 19
+       0          20 TO 29
+       0          30 TO 39
+       0          40 TO 49
+       0          50 TO 59
+       0          60 TO 69
+       0          70 TO 79
+       0          80 TO 89
+       0          90 TO 99
+       0         100 TO 99999999: 100+
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)    7753     NON-INTERVIEW(-5)    1230
+ 
+Min:             15        Max:             15        Mean:                  15
+ 
+Lead In: S20046.00[Default]
+Default Next Question: S20049.00
+--------------------------------------------------------------------------------
+S20049.00    [CV_BA_CREDITS.01]                             Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD BACHELORS DEGREE AT SCHOOL 01
+ 
+Fraction of credits earned toward a bachelor's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+      34           0
+      13           1 TO 9
+      77          10 TO 19
+     173          20 TO 29
+     173          30 TO 39
+     155          40 TO 49
+     166          50 TO 59
+     177          60 TO 69
+     167          70 TO 79
+     148          80 TO 89
+     144          90 TO 99
+     207         100 TO 99999999: 100+
+  -------
+    1634
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)     332
+TOTAL =========>    1966   VALID SKIP(-4)    5788     NON-INTERVIEW(-5)    1230
+ 
+Min:              0        Max:            100        Mean:                  60
+ 
+Lead In: S20047.00[Default]
+Default Next Question: S20050.00
+--------------------------------------------------------------------------------
+S20050.00    [CV_BA_CREDITS.02]                             Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD BACHELORS DEGREE AT SCHOOL 02
+ 
+Fraction of credits earned toward a bachelor's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+      27           0
+      24           1 TO 9
+      46          10 TO 19
+      33          20 TO 29
+      20          30 TO 39
+      18          40 TO 49
+      32          50 TO 59
+      18          60 TO 69
+      16          70 TO 79
+       9          80 TO 89
+       5          90 TO 99
+       3         100 TO 99999999: 100+
+  -------
+     251
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)     113
+TOTAL =========>     364   VALID SKIP(-4)    7390     NON-INTERVIEW(-5)    1230
+ 
+Min:              0        Max:            100        Mean:               34.65
+ 
+Lead In: S20049.00[Default]
+Default Next Question: S20051.00
+--------------------------------------------------------------------------------
+S20051.00    [CV_BA_CREDITS.03]                             Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD BACHELORS DEGREE AT SCHOOL 03
+ 
+Fraction of credits earned toward a bachelor's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+       0           0
+       1           1 TO 9
+       2          10 TO 19
+       1          20 TO 29
+       1          30 TO 39
+       1          40 TO 49
+       2          50 TO 59
+       2          60 TO 69
+       1          70 TO 79
+       1          80 TO 89
+       2          90 TO 99
+       0         100 TO 99999999: 100+
+  -------
+      14
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       9
+TOTAL =========>      23   VALID SKIP(-4)    7731     NON-INTERVIEW(-5)    1230
+ 
+Min:              5        Max:             98        Mean:               51.29
+ 
+Lead In: S20050.00[Default]
+Default Next Question: S20052.00
+--------------------------------------------------------------------------------
+S20052.00    [CV_BA_CREDITS.04]                             Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD BACHELORS DEGREE AT SCHOOL 04
+ 
+Fraction of credits earned toward a bachelor's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+       2           0
+       0           1 TO 9
+       0          10 TO 19
+       0          20 TO 29
+       0          30 TO 39
+       0          40 TO 49
+       0          50 TO 59
+       0          60 TO 69
+       0          70 TO 79
+       0          80 TO 89
+       0          90 TO 99
+       0         100 TO 99999999: 100+
+  -------
+       2
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       1
+TOTAL =========>       3   VALID SKIP(-4)    7751     NON-INTERVIEW(-5)    1230
+ 
+Min:              0        Max:              0        Mean:                   0
+ 
+Lead In: S20051.00[Default]
+Default Next Question: S20053.00
+--------------------------------------------------------------------------------
+S20053.00    [CV_BA_CREDITS.05]                             Survey Year: 2003
+  PRIMARY VARIABLE
+
+             CREDITS EARNED TOWARD BACHELORS DEGREE AT SCHOOL 05
+ 
+Fraction of credits earned toward a bachelor's degree as of the survey date.
+ 
+NOTE:  2 IMPLIED DECIMAL PLACES
+ 
+       0           0
+       0           1 TO 9
+       0          10 TO 19
+       0          20 TO 29
+       0          30 TO 39
+       0          40 TO 49
+       0          50 TO 59
+       1          60 TO 69
+       0          70 TO 79
+       0          80 TO 89
+       0          90 TO 99
+       0         100 TO 99999999: 100+
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)    7753     NON-INTERVIEW(-5)    1230
+ 
+Min:             65        Max:             65        Mean:                  65
+ 
+Lead In: S20052.00[Default]
+Default Next Question: S20054.00
+--------------------------------------------------------------------------------
+S20077.01    [CV_ENROLLSTAT_EDT]                            Survey Year: 2003
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS EDT
+ 
+Enrollment status as of the survey date (edited).
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+    1098       1 Not enrolled, no high school degree, no GED
+     503       2 Not enrolled, GED
+    1814       3 Not enrolled, high school degree
+    1176       4 Not enrolled, some college
+     118       5 Not enrolled, 2-year college graduate
+     251       6 Not enrolled, 4-year college graduate
+       4       7 Not enrolled, graduate degree
+     141       8 Enrolled in grades 1-12, not a high school graduate
+     801       9 Enrolled in a 2-year college
+    1762      10 Enrolled in a 4-year college
+      64      11 Enrolled in a graduate program
+  -------
+    7732
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      22
+TOTAL =========>    7754   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1230
+ 
+Min:              1        Max:             11        Mean:                5.31
+ 
+Lead In: S20077.00[Default]
+Default Next Question: S20110.00
+--------------------------------------------------------------------------------
+S38085.01    [CV_ENROLLSTAT_EDT]                            Survey Year: 2004
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS EDT
+ 
+Enrollment status as of the survey date (edited).
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     974       1 Not enrolled, no high school degree, no GED
+     512       2 Not enrolled, GED
+    1686       3 Not enrolled, high school degree
+    1429       4 Not enrolled, some college
+     179       5 Not enrolled, 2-year college graduate
+     465       6 Not enrolled, 4-year college graduate
+      15       7 Not enrolled, graduate degree
+      52       8 Enrolled in grades 1-12, not a high school graduate
+     592       9 Enrolled in a 2-year college
+    1449      10 Enrolled in a 4-year college
+     128      11 Enrolled in a graduate program
+  -------
+    7481
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      21
+TOTAL =========>    7502   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1482
+ 
+Min:              1        Max:             11        Mean:                5.11
+ 
+Lead In: S38085.00[Default]
+Default Next Question: S38119.00
+--------------------------------------------------------------------------------
+S54089.00    [CV_ENROLLSTAT]                                Survey Year: 2005
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     915       1 Not enrolled, no high school degree, no GED
+     542       2 Not enrolled, GED
+    1579       3 Not enrolled, high school degree
+    1574       4 Not enrolled, some college
+     224       5 Not enrolled, 2-year college graduate
+     675       6 Not enrolled, 4-year college graduate
+      32       7 Not enrolled, graduate degree
+      33       8 Enrolled in grades 1-12, not a high school graduate
+     454       9 Enrolled in a 2-year college
+    1096      10 Enrolled in a 4-year college
+     193      11 Enrolled in a graduate program
+  -------
+    7317
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      21
+TOTAL =========>    7338   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1646
+ 
+Min:              1        Max:             11        Mean:                 4.9
+ 
+Lead In: S54088.00[Default]
+Default Next Question: S54123.00
+--------------------------------------------------------------------------------
+S75097.00    [CV_ENROLLSTAT]                                Survey Year: 2006
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     917       1 Not enrolled, no high school degree, no GED
+     590       2 Not enrolled, GED
+    1568       3 Not enrolled, high school degree
+    1760       4 Not enrolled, some college
+     276       5 Not enrolled, 2-year college graduate
+     942       6 Not enrolled, 4-year college graduate
+      44       7 Not enrolled, graduate degree
+      27       8 Enrolled in grades 1-12, not a high school graduate
+     378       9 Enrolled in a 2-year college
+     776      10 Enrolled in a 4-year college
+     263      11 Enrolled in a graduate program
+  -------
+    7541
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      18
+TOTAL =========>    7559   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1425
+ 
+Min:              1        Max:             11        Mean:                 4.7
+ 
+Lead In: S75096.00[Default]
+Default Next Question: S75132.00
+--------------------------------------------------------------------------------
+T00130.00    [CV_ENROLLSTAT]                                Survey Year: 2007
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     852       1 Not enrolled, no high school degree, no GED
+     615       2 Not enrolled, GED
+    1481       3 Not enrolled, high school degree
+    1731       4 Not enrolled, some college
+     321       5 Not enrolled, 2-year college graduate
+    1128       6 Not enrolled, 4-year college graduate
+     119       7 Not enrolled, graduate degree
+      21       8 Enrolled in grades 1-12, not a high school graduate
+     354       9 Enrolled in a 2-year college
+     505      10 Enrolled in a 4-year college
+     268      11 Enrolled in a graduate program
+  -------
+    7395
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      23
+TOTAL =========>    7418   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1566
+ 
+Min:              1        Max:             11        Mean:                 4.6
+ 
+Lead In: T00129.00[Default]
+Default Next Question: T00136.00
+--------------------------------------------------------------------------------
+T20159.00    [CV_ENROLLSTAT]                                Survey Year: 2008
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     854       1 Not enrolled, no high school degree, no GED
+     581       2 Not enrolled, GED
+    1457       3 Not enrolled, high school degree
+    1786       4 Not enrolled, some college
+     343       5 Not enrolled, 2-year college graduate
+    1192       6 Not enrolled, 4-year college graduate
+     193       7 Not enrolled, graduate degree
+      17       8 Enrolled in grades 1-12, not a high school graduate
+     334       9 Enrolled in a 2-year college
+     400      10 Enrolled in a 4-year college
+     302      11 Enrolled in a graduate program
+  -------
+    7459
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      31
+TOTAL =========>    7490   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1494
+ 
+Min:              1        Max:             11        Mean:                4.59
+ 
+Lead In: T20158.00[Default]
+Default Next Question: T20160.00
+--------------------------------------------------------------------------------
+T36062.00    [CV_ENROLLSTAT]                                Survey Year: 2009
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1):  This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2):  Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     779       1 Not enrolled, no high school degree, no GED
+     639       2 Not enrolled, GED
+    1431       3 Not enrolled, high school degree
+    1773       4 Not enrolled, some college
+     379       5 Not enrolled, 2-year college graduate
+    1234       6 Not enrolled, 4-year college graduate
+     263       7 Not enrolled, graduate degree
+      22       8 Enrolled in grades 1-12, not a high school graduate
+     347       9 Enrolled in a 2-year college
+     352      10 Enrolled in a 4-year college
+     299      11 Enrolled in a graduate program
+  -------
+    7518
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      41
+TOTAL =========>    7559   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1425
+ 
+Min:              1        Max:             11        Mean:                4.61
+ 
+Lead In: T36061.00[Default]
+Default Next Question: T36063.00
+--------------------------------------------------------------------------------
+T52066.00    [CV_ENROLLSTAT]                                Survey Year: 2010
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     721       1 Not enrolled, no high school degree, no GED
+     644       2 Not enrolled, GED
+    1333       3 Not enrolled, high school degree
+    1780       4 Not enrolled, some college
+     405       5 Not enrolled, 2-year college graduate
+    1232       6 Not enrolled, 4-year college graduate
+     334       7 Not enrolled, graduate degree
+      35       8 Enrolled in grades 1-12, not a high school graduate
+     339       9 Enrolled in a 2-year college
+     336      10 Enrolled in a 4-year college
+     275      11 Enrolled in a graduate program
+  -------
+    7434
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      45
+TOTAL =========>    7479   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1505
+ 
+Min:              1        Max:             11        Mean:                4.65
+ 
+Lead In: T52065.00[Default]
+Default Next Question: T52067.00
+--------------------------------------------------------------------------------
+T66564.00    [CV_ENROLLSTAT]                                Survey Year: 2011
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     688       1 Not enrolled, no high school degree, no GED
+     656       2 Not enrolled, GED
+    1291       3 Not enrolled, high school degree
+    1793       4 Not enrolled, some college
+     444       5 Not enrolled, 2-year college graduate
+    1235       6 Not enrolled, 4-year college graduate
+     397       7 Not enrolled, graduate degree
+      34       8 Enrolled in grades 1-12, not a high school graduate
+     312       9 Enrolled in a 2-year college
+     293      10 Enrolled in a 4-year college
+     231      11 Enrolled in a graduate program
+  -------
+    7374
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      49
+TOTAL =========>    7423   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1561
+ 
+Min:              1        Max:             11        Mean:                4.61
+ 
+Lead In: T66563.00[Default]
+Default Next Question: T66565.00
+--------------------------------------------------------------------------------
+T81288.00    [CV_ENROLLSTAT]                                Survey Year: 2013
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     605       1 Not enrolled, no high school degree, no GED
+     619       2 Not enrolled, GED
+    1195       3 Not enrolled, high school degree
+    1804       4 Not enrolled, some college
+     481       5 Not enrolled, 2-year college graduate
+    1227       6 Not enrolled, 4-year college graduate
+     501       7 Not enrolled, graduate degree
+      20       8 Enrolled in grades 1-12, not a high school graduate
+     225       9 Enrolled in a 2-year college
+     245      10 Enrolled in a 4-year college
+     177      11 Enrolled in a graduate program
+  -------
+    7099
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      41
+TOTAL =========>    7140   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1844
+ 
+Min:              1        Max:             11        Mean:                4.58
+ 
+Lead In: T81287.00[Default]
+Default Next Question: T81289.00
+--------------------------------------------------------------------------------
+U00087.00    [CV_ENROLLSTAT]                                Survey Year: 2015
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     578       1 Not enrolled, no high school degree, no GED
+     633       2 Not enrolled, GED
+    1147       3 Not enrolled, high school degree
+    1825       4 Not enrolled, some college
+     500       5 Not enrolled, 2-year college graduate
+    1255       6 Not enrolled, 4-year college graduate
+     578       7 Not enrolled, graduate degree
+      14       8 Enrolled in grades 1-12, not a high school graduate
+     176       9 Enrolled in a 2-year college
+     203      10 Enrolled in a 4-year college
+     147      11 Enrolled in a graduate program
+  -------
+    7056
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      47
+TOTAL =========>    7103   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1881
+ 
+Min:              1        Max:             11        Mean:                4.54
+ 
+Lead In: U00086.00[Default]
+Default Next Question: U00088.00
+--------------------------------------------------------------------------------
+U18453.00    [CV_ENROLLSTAT]                                Survey Year: 2017
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     500       1 Not enrolled, no high school degree, no GED
+     592       2 Not enrolled, GED
+    1063       3 Not enrolled, high school degree
+    1727       4 Not enrolled, some college
+     533       5 Not enrolled, 2-year college graduate
+    1257       6 Not enrolled, 4-year college graduate
+     659       7 Not enrolled, graduate degree
+       5       8 Enrolled in grades 1-12, not a high school graduate
+     120       9 Enrolled in a 2-year college
+     138      10 Enrolled in a 4-year college
+     108      11 Enrolled in a graduate program
+  -------
+    6702
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      32
+TOTAL =========>    6734   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    2250
+ 
+Min:              1        Max:             11        Mean:                4.52
+ 
+Lead In: U18452.00[Default]
+Default Next Question: U18454.00
+--------------------------------------------------------------------------------
+U34438.00    [CV_ENROLLSTAT]                                Survey Year: 2019
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     486       1 Not enrolled, no high school degree, no GED
+     619       2 Not enrolled, GED
+    1092       3 Not enrolled, high school degree
+    1786       4 Not enrolled, some college
+     562       5 Not enrolled, 2-year college graduate
+    1304       6 Not enrolled, 4-year college graduate
+     726       7 Not enrolled, graduate degree
+       7       8 Enrolled in grades 1-12, not a high school graduate
+     106       9 Enrolled in a 2-year college
+     132      10 Enrolled in a 4-year college
+      98      11 Enrolled in a graduate program
+  -------
+    6918
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      29
+TOTAL =========>    6947   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    2037
+ 
+Min:              1        Max:             11        Mean:                4.52
+ 
+Lead In: U34437.00[Default]
+Default Next Question: U34439.00
+--------------------------------------------------------------------------------
+U49495.00    [CV_ENROLLSTAT]                                Survey Year: 2021
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     483       1 Not enrolled, no high school degree, no GED
+     618       2 Not enrolled, GED
+    1029       3 Not enrolled, high school degree
+    1693       4 Not enrolled, some college
+     566       5 Not enrolled, 2-year college graduate
+    1270       6 Not enrolled, 4-year college graduate
+     746       7 Not enrolled, graduate degree
+       6       8 Enrolled in grades 1-12, not a high school graduate
+      67       9 Enrolled in a 2-year college
+     103      10 Enrolled in a 4-year college
+     101      11 Enrolled in a graduate program
+  -------
+    6682
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      31
+TOTAL =========>    6713   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    2271
+ 
+Min:              1        Max:             11        Mean:                 4.5
+ 
+Lead In: U49494.00[Default]
+Default Next Question: U49496.00
+--------------------------------------------------------------------------------
+U63562.00    [CV_ENROLLSTAT]                                Survey Year: 2023
+  PRIMARY VARIABLE
+
+             RS CURRENT ENROLLMENT STATUS
+ 
+Enrollment status as of the survey date.
+ 
+Note (1): This variable refers to the type of college the R attended, not the 
+college degree that R reported working towards or that R attained.
+ 
+Note(2): Rs who are working towards a GED are coded as an '8' regardless of 
+where that course of study took place.
+ 
+     429       1 Not enrolled, no high school degree, no GED
+     606       2 Not enrolled, GED
+    1008       3 Not enrolled, high school degree
+    1662       4 Not enrolled, some college
+     573       5 Not enrolled, 2-year college graduate
+    1234       6 Not enrolled, 4-year college graduate
+     778       7 Not enrolled, graduate degree
+      10       8 Enrolled in grades 1-12, not a high school graduate
+      59       9 Enrolled in a 2-year college
+      88      10 Enrolled in a 4-year college
+      90      11 Enrolled in a graduate program
+  -------
+    6537
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      32
+TOTAL =========>    6569   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    2415
+ 
+Min:              1        Max:             11        Mean:                4.51
+ 
+Lead In: U63561.00[Default]
+Default Next Question: U63563.00
+--------------------------------------------------------------------------------
+Z90839.00    [CVC_HIGHEST_DEGREE_EVER]                      Survey Year: XRND
+  PRIMARY VARIABLE
+
+             HIGHEST DEGREE RECEIVED
+ 
+CUMULATIVE VARIABLE: The highest degree received. This variable is created for 
+all respondents regardless of interview status in the current round; CVC_RND 
+provides the actual round of the respondent's most recent interview.
+ 
+     847       0 None
+    1187       1 GED
+    3494       2 High school diploma (Regular 12 year program)
+     764       3 Associate/Junior college (AA)
+    1703       4 Bachelor's degree (BA, BS)
+     757       5 Master's degree (MA, MS)
+      68       6 PhD
+     133       7 Professional degree (DDS, JD, MD)
+  -------
+    8953
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      31
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              7        Mean:                 2.5
+ 
+Lead In: Z90838.00[Default]
+Default Next Question: Z90840.00
+--------------------------------------------------------------------------------
+Z90843.00    [CVC_AA_DEGREE]                                Survey Year: XRND
+  PRIMARY VARIABLE
+
+             DATE RECEIVED ASSOCIATES DEGREE
+ 
+CUMULATIVE VARIABLE: Date received an associate's degree in a continuous month 
+scheme (see Appendix 7 in the codebook for more information). If more than one 
+associate's degree is reported, this variable presents the earliest valid date. 
+This variable is created for all respondents regardless of interview status in 
+the current round; CVC_RND provides the actual round of the respondent's most 
+recent interview.
+ 
+       0           0 TO 200
+       0         201 TO 220
+       4         221 TO 240
+      51         241 TO 260
+      93         261 TO 280
+     221         281 TO 300
+     175         301 TO 320
+      91         321 TO 340
+     115         341 TO 360
+     103         361 TO 380
+      69         381 TO 400
+      68         401 TO 420
+      63         421 TO 440
+      46         441 TO 460
+      53         461 TO 480
+      39         481 TO 500
+       8         501 TO 520
+       7         521 TO 540
+  -------
+    1206
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      23
+TOTAL =========>    1229   VALID SKIP(-4)    7755     NON-INTERVIEW(-5)       0
+ 
+Min:            235        Max:            529        Mean:              348.44
+ 
+Lead In: Z90842.00[Default]
+Default Next Question: Z90844.00
+--------------------------------------------------------------------------------
+Z90844.00    [CVC_BA_DEGREE]                                Survey Year: XRND
+  PRIMARY VARIABLE
+
+             DATE RECEIVED BACHELORS DEGREE
+ 
+CUMULATIVE VARIABLE: Date received a bachelor' s degree in a continuous month 
+scheme (see Appendix 7 in the codebook for more information). If more than one 
+bachelor's degree is reported, this variable presents the earliest valid date. 
+This variable is created for all respondents regardless of interview status in 
+the current round; CVC_RND provides the actual round of the respondent's most 
+recent interview.
+ 
+       0           0 TO 200
+       0         201 TO 220
+       0         221 TO 240
+      10         241 TO 260
+     128         261 TO 280
+     546         281 TO 300
+     663         301 TO 320
+     368         321 TO 340
+     220         341 TO 360
+     107         361 TO 380
+      65         381 TO 400
+      86         401 TO 420
+      61         421 TO 440
+      48         441 TO 460
+      47         461 TO 480
+      40         481 TO 500
+      25         501 TO 520
+      10         521 TO 540
+  -------
+    2424
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)     157
+TOTAL =========>    2581   VALID SKIP(-4)    6403     NON-INTERVIEW(-5)       0
+ 
+Min:            245        Max:            533        Mean:              333.14
+ 
+Lead In: Z90843.00[Default]
+Default Next Question: Z90845.00
