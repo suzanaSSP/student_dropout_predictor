@@ -25,3 +25,10 @@ Meeting notes (10/27/2026):
         - 
 
 
+Suzana Notes:
+- multicolinearity
+- Address what I Find
+- Standardize
+- Logistic Regression
+
+
