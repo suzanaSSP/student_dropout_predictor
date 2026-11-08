@@ -31,4 +31,12 @@ Suzana Notes:
 - Standardize
 - Logistic Regression
 
+Goals & Questions:
+**Detecting at-risk student beforehand**
+- How well can we predict dropout using only pre-enrollment data (admission score, first-gen, income, course type) to place students in summer bridge programs?
+- What is the predictive lift of in-semester behavioral signals (attendance_rate, lms_logins_per_week, missed_deadlines, library_visits_per_month)? 
+- Can these digital breadcrumbs trigger an alert in Week 4 or 5?
+- At what point in the academic journey does prediction confidence become high enough to warrant high-touch human intervention?
+
+
 
