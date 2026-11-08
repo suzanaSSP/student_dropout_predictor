@@ -26,6 +26,7 @@ Meeting notes (10/27/2026):
 
 
 Suzana Notes:
+new_dataset: https://www.kaggle.com/datasets/mohankrishnathalla/student-academic-performance-and-dropout-risk?resource=download
 - multicolinearity
 - Address what I Find
 - Standardize
