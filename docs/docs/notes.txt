@@ -40,4 +40,8 @@ Goals & Questions:
 - At what point in the academic journey does prediction confidence become high enough to warrant high-touch human intervention?
 
 
+Some findings: 
+- In the encoded
+
+
 
